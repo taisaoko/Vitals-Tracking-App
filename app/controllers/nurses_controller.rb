@@ -1,10 +1,15 @@
 class NursesController < ApplicationController
 
+  get '/nurses/:slug' do
+    @nurse = Nurse.find_by_slug(params[:slug])
+    erb :'nurses/show'
+  end
+
   get '/signup' do
     if !logged_in?
       erb :'nurses/create_nurse', locals: {message: "Please sign up before you sign in"}
     else
-      redirect '/nurses/#{@nurse.id}'
+      redirect 'nurses/:slug'
     end
   end
   
@@ -15,7 +20,7 @@ class NursesController < ApplicationController
       @nurse = Nurse.new(:username => params[:username], :badge_number => params[:badge_number], :password => params[:password])
       @nurse.save
       session[:nurse_id] = @nurse.id
-      redirect '/nurses/#{@nurse.id}'
+      redirect 'nurses/:slug'
     end
   end
 
@@ -23,7 +28,7 @@ class NursesController < ApplicationController
     if !logged_in?
       erb :'nurses/login'      
     else
-      redirect to '/nurses/#{@nurse.id}'
+      redirect 'nurses/:slug'
     end
   end
 
@@ -31,7 +36,7 @@ class NursesController < ApplicationController
     nurse = Nurse.find_by(:username => params[:username])
     if nurse && nurse.authenticate(params[:password])
       session[:nurse_id] = nurse.id
-      redirect to "nurses/#{@nurse.id}"
+      redirect 'nurses/:slug'
     else
       redirect to '/signup'
     end
@@ -44,10 +49,6 @@ class NursesController < ApplicationController
     else
       redirect to '/'
     end
-  end
-
-  get "/nurses/:id" do
-    erb :"/nurses/show"
   end
 
   # GET: /nurses/5/edit

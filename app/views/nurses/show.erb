@@ -1,1 +1,17 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<p>Here are your patients, <%= @nurse.username %>
+<table>
+  <tr>
+      <ul>
+      Patients
+        <%@nurse.patients.each do |patient|%>
+        <li><%=patient.name%></li>
+        <%end%>
+      </ul>      
+  </tr>
+      </td>
+</table>
+<br>
+
+<a class="button" href="/nurses/<%= @nurse.id %>/edit">Edit</a>
+<a class="button" href="/nurses">Nurses</a>
+<a class="button" href="/">Go Home</a>
