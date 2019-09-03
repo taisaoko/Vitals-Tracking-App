@@ -19,24 +19,18 @@ class NursesController < ApplicationController
     end
   end
 
-  # GET: /nurses
-  get "/nurses" do
-    erb :"/nurses/index.html"
+  get '/login' do
+    if !logged_in?
+      binding.pry
+      erb :'nurses/login'
+      
+    else
+      redirect to '/nurses/#{@nurse.id}'
+    end
   end
 
-  # GET: /nurses/new
-  get "/nurses/new" do
-    erb :"/nurses/new.html"
-  end
-
-  # POST: /nurses
-  post "/nurses" do
-    redirect "/nurses"
-  end
-
-  # GET: /nurses/5
   get "/nurses/:id" do
-    erb :"/nurses/show.html"
+    erb :"/nurses/show"
   end
 
   # GET: /nurses/5/edit
