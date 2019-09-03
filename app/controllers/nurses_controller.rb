@@ -2,9 +2,9 @@ class NursesController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      erb :'nurses/create_user', locals: {message: "Please sign up before you sign in"}
+      erb :'nurses/create_nurse', locals: {message: "Please sign up before you sign in"}
     else
-      redirect to '/patients'
+      redirect '/nurses/#{@nurse.id}'
     end
   end
   
@@ -15,7 +15,7 @@ class NursesController < ApplicationController
       @nurse = Nurse.new(:username => params[:username], :badge_number => params[:badge_number], :password => params[:password])
       @nurse.save
       session[:nurse_id] = @nurse.id
-      redirect to '/patients'
+      redirect '/nurses/#{@nurse.id}'
     end
   end
 
