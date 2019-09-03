@@ -21,11 +21,28 @@ class NursesController < ApplicationController
 
   get '/login' do
     if !logged_in?
-      binding.pry
-      erb :'nurses/login'
-      
+      erb :'nurses/login'      
     else
       redirect to '/nurses/#{@nurse.id}'
+    end
+  end
+
+  post '/login' do
+    nurse = Nurse.find_by(:username => params[:username])
+    if nurse && nurse.authenticate(params[:password])
+      session[:nurse_id] = nurse.id
+      redirect to "nurses/#{@nurse.id}"
+    else
+      redirect to '/signup'
+    end
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.destroy
+      redirect to '/login'
+    else
+      redirect to '/'
     end
   end
 
