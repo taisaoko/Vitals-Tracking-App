@@ -1,5 +1,24 @@
 class NursesController < ApplicationController
 
+  get '/signup' do
+    if !logged_in?
+      erb :'nurses/create_user', locals: {message: "Please sign up before you sign in"}
+    else
+      redirect to '/patients'
+    end
+  end
+  
+  post '/signup' do
+    if params[:username] == "" || params[:badge_number] == "" || params[:password] == ""
+      redirect to '/signup'
+    else
+      @nurse = Nurse.new(:username => params[:username], :badge_number => params[:badge_number], :password => params[:password])
+      @nurse.save
+      session[:nurse_id] = @nurse.id
+      redirect to '/patients'
+    end
+  end
+
   # GET: /nurses
   get "/nurses" do
     erb :"/nurses/index.html"
