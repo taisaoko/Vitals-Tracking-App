@@ -7,7 +7,7 @@ class NursesController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      erb :'nurses/create_nurse', locals: {message: "Please sign up before you sign in"}
+      erb :'nurses/new', locals: {message: "Please sign up before you sign in"}
     else
       redirect 'nurses/:slug'
     end
