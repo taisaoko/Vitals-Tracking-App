@@ -50,19 +50,4 @@ class NursesController < ApplicationController
       redirect to '/'
     end
   end
-
-  # GET: /nurses/5/edit
-  get "/nurses/:id/edit" do
-    erb :"/nurses/edit.html"
-  end
-
-  # PATCH: /nurses/5
-  patch "/nurses/:id" do
-    redirect "/nurses/:id"
-  end
-
-  # DELETE: /nurses/5/delete
-  delete "/nurses/:id/delete" do
-    redirect "/nurses"
-  end
 end
