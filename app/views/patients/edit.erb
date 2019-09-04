@@ -1,0 +1,17 @@
+<h1>Edit a new Patient:</h1>
+
+<form action="/patients/<%=@patient.id%>" method="POST">
+    <input id="hidden" type="hidden" name="_method" value="patch" />
+
+    <label for="patient_name">Name</label><br>
+    <input id="name" type="text" name="patient[name]" value=<%=@patient.name%> ><br>
+    <label for="patient_medical_record_number">Medical Record Number</label><br>
+    <input id="medical_record_number" type="integer" name="patient[medical_record_number]" value=<%=@patient.medical_record_number%>><br>
+    <label for="patient_date_of_birth">Date of Birthr</label><br>
+    <input id="date_of_birth" type="date" name="patient[date_of_birth]" value= @m.date_of_birth.strftime("%Y-%m-%d") <br>
+
+    <input type="submit" value="Edit patient">
+</form>
+
+<a class="button" href="/patients">patients</a>
+<a class="button" href="/">Home</a>
