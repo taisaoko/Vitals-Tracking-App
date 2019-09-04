@@ -1,23 +1,45 @@
 class PatientsController < ApplicationController
-
-  # GET: /patients
-  get "/patients" do
-    erb :"/patients/index.html"
+  get '/patients' do
+    if logged_in?
+      @patients= Patient.all
+      erb :'patients/index'
+    else
+      redirect to '/login'
+    end
   end
 
-  # GET: /patients/new
-  get "/patients/new" do
-    erb :"/patients/new.html"
+  get '/patients/new' do
+    if logged_in?
+      erb :'patients/new'
+    else
+      redirect to '/login'
+    end
   end
 
-  # POST: /patients
-  post "/patients" do
-    redirect "/patients"
+  post '/patients' do
+    if logged_in?
+      if params[:name] == "" || params[:medical_record_number] == "" || params[date_of_birth] == ""
+        redirect to "/patients/new"
+      else
+        @patient = current_user.patients.build(name: params[:name], medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
+        if @patient.save
+          redirect to "/patients/#{@patient.id}"
+        else
+          redirect to "/patients/new"
+        end
+      end
+    else
+      redirect to '/login'
+    end
   end
 
-  # GET: /patients/5
-  get "/patients/:id" do
-    erb :"/patients/show.html"
+  get '/patients/:id' do
+    if logged_in?
+      @patient = Patient.find_by_id(params[:id])
+      erb :'patients/show'
+    else
+      redirect to '/login'
+    end
   end
 
   # GET: /patients/5/edit

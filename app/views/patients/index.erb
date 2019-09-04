@@ -1,1 +1,19 @@
-<h1>This is the Model's index page.</h1>
+<h2>All Patientss</h2>
+<table>
+  <th>Name</th>
+  <th>Medical Record Number</th>
+  <th>Date of Birth</th>
+  <tr>
+    <% @patients.each do |patient| %>
+      <td align="center"><a href="/patients/<%= patient.id %>"><%= patient.name %></a></td>
+
+      <td align="center"><%= patient.medical_record_number %></td>
+
+      <td align="center"><%= patient.date_of_birth %></td>
+  </tr>
+  <% end %>
+</table>
+<br>
+
+<a class="button" href="/patients">Patients</a>
+<a class="button" href="/">Home</a>
