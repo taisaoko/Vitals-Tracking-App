@@ -1,7 +1,7 @@
 class CreateNurses < ActiveRecord::Migration
   def change
     create_table :nurses do |t|
-      t.string :username
+      t.string :name
       t.integer :badge_number
       t.string :password_digest
 
