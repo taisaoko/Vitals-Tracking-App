@@ -14,6 +14,13 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+    <div class="nav">
+      <% if logged_in? %>
+        <a href="/logout">Logout</a>
+        <a href="/patients">All Patients</a>
+        <a href="/patients/new">New Patient</a>
+      <% end %>
+    </div>
     <div class="wrapper">
         <h1>VitalsTrackingApp</h1>
         <%= yield %>
