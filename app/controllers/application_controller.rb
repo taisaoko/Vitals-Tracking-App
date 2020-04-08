@@ -20,7 +20,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= Nurse.find(session[:nurse_id])
+      @current_user ||= Nurse.find_by(id: session[:nurse_id])
     end
 
     def authorized_to_edit?(patient)
@@ -38,7 +38,7 @@ class ApplicationController < Sinatra::Base
     # use this helper method to avoid showing welcome, login, or signup page to a nurse that's already logged in
     def redirect_if_logged_in
       if logged_in?
-        redirect "/nurse/:slug"
+        redirect "/nurses/:slug"
       end
     end
   end

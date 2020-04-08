@@ -2,6 +2,7 @@
 
 Specs:
 - [x] Use Sinatra to build the app
+I am using Sinatra to build my app...
 - [x] Use ActiveRecord for storing information in a database
 - [x] Include more than one model class (e.g. User, Post, Category)
 - [x] Include at least one has_many relationship on your User model (e.g. User has_many Posts)

@@ -2,61 +2,76 @@ class NursesController < ApplicationController
   
   # the purpost of this route is to render the login form
   get '/login' do
-    if !logged_in?
+    redirect_if_logged_in
       erb :'nurses/login'      
-    else
-      redirect 'nurses/:slug'
-    end
-  end
-
-  get '/nurses/:slug' do
-    @nurse = Nurse.find_by_slug(params[:slug])
-    erb :'nurses/show'
   end
 
   # the purpost of this route is to receive the login form, find the nurse, and log the nurse in (create a session)
   post '/login' do
     @nurse = Nurse.find_by(badge_number: params[:badge_number])
     # Authenticate the nurse - verify the nurse by their credentials - badge number/password combo
-    if nurse && nurse.authenticate(params[:password])
+    if @nurse && @nurse.authenticate(params[:password])
       # log the user in - create the user session
       session[:nurse_id] = @nurse.id
       # redirect to nurse's show page
       # flash [:message] = "Welcome, #{@nurse.name}!"
       redirect 'nurses/:slug'
     else
-      # flash[:errors] = "Your credentials were invalid.  Please sign up or try again."
+      flash[:errors] = "Your credentials were invalid.  Please sign up or try again."
       # tell the user they entered invalid credentials
       # redirect them to the login page
       redirect to 'nurses/login'
     end
   end
 
+  # this route's job is to render the signup form
   get '/signup' do
-    if !logged_in?
-      erb :'nurses/new', locals: {message: "Please sign up before you sign in"}
-    else
-      redirect 'nurses/:slug'
-    end
+    redirect_if_logged_in
+    erb :'nurses/new', locals: {message: "Please sign up before you sign in"}
   end
   
-  post '/signup' do
-    if params[:username] == "" || params[:badge_number] == "" || params[:password] == ""
-      redirect to '/signup'
+  post '/nurses' do
+    # here is where we will create a new user and persist the new nurse to the DB
+    # params will look like this: {"name"=>"Elizabeth", "badge_number"=>"222", "password"=>"password"}
+    # I only want to persist a nurse that has a name, badge_number, AND password
+    @nurse = Nurse.new(params)
+    # I now have ActiveRecord Validations within my nurse model class, rather
+    # than just checking for params keys to have values.  Either way works fine,
+    # and checking params is fine for this project.  AR validations give us
+    # a little more functionality if we want it.
+    if @nurse.save
+      # valid input
+      session[:nurse_id] = @nurse.id # actually logging the user in
+      # go to the user show page
+      # flash[:message] = "You have successfully created an account, #{@nurse.name}! Welcome!"
+      redirect "/nurses/:slug"
     else
-      @nurse = Nurse.new(:username => params[:username], :badge_number => params[:badge_number], :password => params[:password])
-      @nurse.save
-      session[:nurse_id] = @nurse.id
-      redirect 'nurses/:slug'
+      # not valid input
+      # it would be better to include a message to the user
+      # telling them what is wrong
+
+      # flash[:errors] = "Account creation failure: #{@nurse.errors.full_messages.to_sentence}"
+      redirect '/nurses/new'
     end
+    # if params[:name] == "" || params[:badge_number] == "" || params[:password] == ""
+    #   redirect to '/nurses/new'
+    # else
+    #   @nurse = Nurse.new(:username => params[:username], :badge_number => params[:badge_number], :password => params[:password])
+    #   @nurse.save
+    #   session[:nurse_id] = @nurse.id
+    #   redirect 'nurses/:slug'
+    # end
+  end
+
+  # User SHOW route
+  get '/nurses/:slug' do
+    @nurse = Nurse.find_by_slug(params[:slug])
+    redirect_if_not_logged_in
+    erb :'nurses/show'
   end
 
   get '/logout' do
-    if logged_in?
-      session.destroy
-      redirect to '/login'
-    else
-      redirect to '/'
-    end
+    session.clear
+    redirect '/'
   end
 end

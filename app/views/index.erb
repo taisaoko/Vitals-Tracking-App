@@ -4,9 +4,11 @@
 <nav>
   <% if logged_in? %>
 
-    <a href="/patients/new"> New Patient </a>
-    <a href="/logout"> Log Out </a>
-    <p>Welcome, <%=current_user.username %></p>
+    <a href="/patients/new">New Patient </a>
+    <br><br>
+    <a href="/logout">Log Out </a>
+    <br><br>
+    <p>Welcome, <%=current_user.name %></p>
 
   <% else %>
     <a href="/signup">Sign Up</a>
