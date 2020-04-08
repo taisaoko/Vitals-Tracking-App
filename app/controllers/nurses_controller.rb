@@ -15,7 +15,7 @@ class NursesController < ApplicationController
       session[:nurse_id] = @nurse.id
       # redirect to nurse's show page
       # flash [:message] = "Welcome, #{@nurse.name}!"
-      redirect 'nurses/:slug'
+      redirect "/nurses/#{@nurse.slug}"
     else
       flash[:errors] = "Your credentials were invalid.  Please sign up or try again."
       # tell the user they entered invalid credentials
@@ -44,7 +44,7 @@ class NursesController < ApplicationController
       session[:nurse_id] = @nurse.id # actually logging the user in
       # go to the user show page
       # flash[:message] = "You have successfully created an account, #{@nurse.name}! Welcome!"
-      redirect "/nurses/:slug"
+      redirect "/nurses/#{@nurse.slug}"
     else
       # not valid input
       # it would be better to include a message to the user
@@ -56,10 +56,10 @@ class NursesController < ApplicationController
     # if params[:name] == "" || params[:badge_number] == "" || params[:password] == ""
     #   redirect to '/nurses/new'
     # else
-    #   @nurse = Nurse.new(:username => params[:username], :badge_number => params[:badge_number], :password => params[:password])
+    #   @nurse = Nurse.new(params)
     #   @nurse.save
     #   session[:nurse_id] = @nurse.id
-    #   redirect 'nurses/:slug'
+    #   redirect 'nurses/#{@nurse.slug}'
     # end
   end
 
