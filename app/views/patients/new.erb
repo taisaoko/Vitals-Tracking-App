@@ -1,12 +1,12 @@
 <h2>Create New Patient</h2>
 
-<form action="/patients" method="POST">
-  <label for="patient_name">Name</label><br>
-  <input id="patient_name" type="text" name="patient[name]" /><br>
-  <label for="patient_medical_record_number">Medical Record Number</label><br>
-  <input id="patient_medical_record_number" type="integer" name="patient[medical_record_number]" /><br>
-  <label for="patient_date_of_birth">Date of Birth</label><br>
-  <input id="patient_date_of_birth" type="date" name="patient[date_of_birth]" value= @m.date_of_birth.strftime("%Y-%m-%d") /><br>
+<form class="" action="/patients" method="POST">
+  <label for="name">Name</label><br>
+  <input ="name" type="text" name="name" /><br>
+  <label for="medical_record_number">Medical Record Number</label><br>
+  <input ="medical_record_number" type="integer" name="medical_record_number" /><br>
+  <label for="date_of_birth">Date of Birth</label><br>
+  <input ="date_of_birth" type="date" name="date_of_birth" value= @m.date_of_birth.strftime("%Y-%m-%d") /><br>
 
   <input type="submit" value="Create New Patient">
 </form>
