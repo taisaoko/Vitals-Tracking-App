@@ -1,4 +1,4 @@
-<h3>Name <%= @patient.name %> </h3>
+<h3>Name <%= @vital.patient.name %> </h3>
 
 <table>
   <tr>
@@ -10,16 +10,19 @@
   <tr>
     <td><%= @vital.blood_pressure %></td>
     <td><%= @vital.pulse %></td>
-    <td><%= @vital.temperatur %></td>
+    <td><%= @vital.temperature %></td>
     <td><%= @vital.oxygen_level%></td>
   </tr>
 <table>
 
-<form method="post" action="/vitals/<%=@vital.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete vital">
-</form>
+<% if !@vital.patient.empty? %>
+  <a href="/vitals/<%= @vital.id %>/edit">Edit vital</a>
+  <br><br>
 
-<a class="button" href="/vitals/<%= @vital.id %>/edit">Edit vital</a>
+  <form method="post" action="/vitals/<%=@vital.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete vital">
+  </form>
+<% end %>
 <a class="button" href="/vitals">Vitals</a>
 
