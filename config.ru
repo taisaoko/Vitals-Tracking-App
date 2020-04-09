@@ -7,5 +7,6 @@ end
 use Rack::MethodOverride
 
 run ApplicationController
+use VitalsController
 use PatientsController
 use NursesController
