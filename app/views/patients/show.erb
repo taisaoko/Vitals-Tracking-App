@@ -1,29 +1,42 @@
-<h3>Name <%= @patient.name %> </h3>
+<h3>Name: <%= @patient.name %> </h3>
 
 <table>
   <tr>
-    <th>Name</th>
     <th>Medical Record Number</th>
     <th>Date of Birth</th>
   </tr>
   <tr>
-    <td><%= @patient.name %></td>
     <td><%= @patient.medical_record_number %></td>
     <td><%= @patient.date_of_birth %></td>
   </tr>
+</table>
+<br>
+
 <table>
+  <tr>
+      <ol>
+      Vitals
+        <%@patient.vitals.each do |vital|%>
+        <li><a href="/vitals/<%= vital.id %>"><%= vital.formatted_created_at %></a></li>
+        <%end%>
+      </ol>      
+  </tr>
+</table>
+<br>
 
 <% if authorized_to_edit?(@patient) %>
+  <a href="/vitals/new">Create new Vital</a>
+  <br><br>
+
   <a href="/patients/<%= @patient.id %>/edit">Edit Patient</a>
   <br><br>
+  
   <form method="post" action="/patients/<%=@patient.id%>">
     <input id="hidden" type="hidden" name="_method" value="DELETE">
     <input type="submit" value="Delete Patient">
   </form>
 
 <% end %>
-
-
 
 <a class="button" href="/patients">Patients</a>
 
