@@ -1,0 +1,23 @@
+<h3>Name <%= @patient.name %> </h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Medical Record Number</th>
+    <th>Date of Birth</th>
+  </tr>
+  <tr>
+    <td><%= @patient.name %></td>
+    <td><%= @patient.medical_record_number %></td>
+    <td><%= @patient.date_of_birth %></td>
+  </tr>
+<table>
+
+<form method="post" action="/patients/<%=@patient.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="Delete Patient">
+</form>
+
+<a class="button" href="/patients/<%= @patient.id %>/edit">Edit Patient</a>
+<a class="button" href="/patients">Patients</a>
+
