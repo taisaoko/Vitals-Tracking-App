@@ -4,14 +4,12 @@
       <ul>
       Patients
         <%@nurse.patients.each do |patient|%>
-        <li><%=patient.name%></li>
+        <li><a href="/patients/<%= patient.id %>"><%= patient.name %></a></li>
         <%end%>
       </ul>      
   </tr>
-      </td>
 </table>
 <br>
 
-<a class="button" href="/nurses/<%= @nurse.id %>/edit">Edit</a>
-<a class="button" href="/nurses">Nurses</a>
+
 <a class="button" href="/">Go Home</a>
