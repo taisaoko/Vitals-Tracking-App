@@ -17,7 +17,7 @@ class PatientsController < ApplicationController
     # I want to create a new patient and save it to the DB 
     # I also only want to create a patient if a nurse is logged in
     # I only want to save the patient with some info
-    if params[:name] != "" || params[:medical_record_number] != "" || params[:date_of_birth] != ""
+    if Patient.valid_params?(params)
       # create a new patient
       @patient = Patient.create(name: params[:name], nurse_id: current_user.id, medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       flash[:message] = "Patient successfully created." if @patient.id
@@ -48,7 +48,7 @@ class PatientsController < ApplicationController
     redirect_if_not_logged_in
     # 1. find the journal entry
     set_patient
-    if authorized_to_edit?(@patient) && params[:name] != ""  
+    if authorized_to_edit?(@patient) && Patient.valid_params?(params) 
       # 2. modify (update) the patient
       @patient.update(name: params[:name], medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       # 3. redirect to show page
