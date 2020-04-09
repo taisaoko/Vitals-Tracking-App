@@ -1,15 +1,17 @@
-<h3>Create New Patient</h3>
+<h3>Create New Vital</h3>
 
-<form class="" action="/patients" method="POST">
-  <label for="name">Name</label><br>
-  <input ="name" type="text" name="name" /><br>
-  <label for="medical_record_number">Medical Record Number</label><br>
-  <input ="medical_record_number" type="integer" name="medical_record_number" /><br>
-  <label for="date_of_birth">Date of Birth</label><br>
-  <input ="date_of_birth" type="date" name="date_of_birth" value= date_of_birth.strftime("%Y-%m-%d") /><br>
+<form class="" action="/vitals" method="POST">
+  <label for="blood_pressure">Blood Pressure</label><br>
+  <input ="blood_pressure" type="text" name="blood_pressure" /><br>
+  <label for="pulse">Pulse</label><br>
+  <input ="pulse" type="integer" name="pulse" /><br>
+  <label for="temperature">Temperature</label><br>
+  <input ="temperature" type="float" name="temperature" /><br>
+  <label for="oxygen_level">Oxygen Level</label><br>
+  <input ="oxygen_level" type="float" name="oxygen_level" /><br>
 
-  <input type="submit" value="Create New Patient">
+  <input type="submit" value="Create New vital">
 </form>
 
-<a class="button" href="/patients">Patients</a>
+<a class="button" href="/vitals">vitals</a>
 <a class="button" href="/">Home</a>

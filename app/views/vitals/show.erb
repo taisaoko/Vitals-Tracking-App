@@ -2,22 +2,24 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Medical Record Number</th>
-    <th>Date of Birth</th>
+    <th>Blood pressure</th>
+    <th>Pulse</th>
+    <th>Temperature</th>
+    <th>Oxygen Level</th>
   </tr>
   <tr>
-    <td><%= @patient.name %></td>
-    <td><%= @patient.medical_record_number %></td>
-    <td><%= @patient.date_of_birth %></td>
+    <td><%= @vital.blood_pressure %></td>
+    <td><%= @vital.pulse %></td>
+    <td><%= @vital.temperatur %></td>
+    <td><%= @vital.oxygen_level%></td>
   </tr>
 <table>
 
-<form method="post" action="/patients/<%=@patient.id%>/delete">
+<form method="post" action="/vitals/<%=@vital.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Patient">
+  <input type="submit" value="Delete vital">
 </form>
 
-<a class="button" href="/patients/<%= @patient.id %>/edit">Edit Patient</a>
-<a class="button" href="/patients">Patients</a>
+<a class="button" href="/vitals/<%= @vital.id %>/edit">Edit vital</a>
+<a class="button" href="/vitals">Vitals</a>
 

@@ -1,19 +1,28 @@
-<h3>All Patients</h3>
+<h3>All Vitals</h3>
 <table>
   <th>Name</th>
-  <th>Medical Record Number</th>
-  <th>Date of Birth</th>
+  <th>ID</th>
+  <th>Blood pressure</th>
+  <th>Pulse</th>
+  <th>Temperature</th>
+  <th>Oxygen Level</th>
   <tr>
-    <% @patients.each do |patient| %>
-      <td align="center"><a href="/patients/<%= patient.id %>"><%= patient.name %></a></td>
+    <% @vitals.each do |vital| %>
+      <td align="center"><a href="/vitals/<%= vital.patient %>"><%= vital.patient.name %></a></td>
 
-      <td align="center"><%= patient.medical_record_number %></td>
+      <td align="center"><a href="/vitals/<%= vital.id %>"><%= vital.id %></a></td>
 
-      <td align="center"><%= patient.date_of_birth %></td>
+      <td align="center"><%= vital.blood_pressure %></a></td>
+
+      <td align="center"><%= vital.pulse %></td>
+
+      <td align="center"><%= vital.temperature%></td>
+
+      <td align="center"><%= vital.oxygen_level%></td>
   </tr>
   <% end %>
 </table>
 <br>
 
-<a class="button" href="/patients">Patients</a>
+<a class="button" href="/vitals">Vitals</a>
 <a class="button" href="/">Home</a>

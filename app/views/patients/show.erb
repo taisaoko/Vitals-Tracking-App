@@ -13,11 +13,17 @@
   </tr>
 <table>
 
-<form method="post" action="/patients/<%=@patient.id%>/delete">
-  <input id="hidden" type="hidden" name="_method" value="DELETE">
-  <input type="submit" value="Delete Patient">
-</form>
+<% if authorized_to_edit?(@patient) %>
+  <a href="/journal_entries/<%= @patient.id %>/edit">Edit Patient</a>
+  <br><br>
+  <form method="post" action="/patients/<%=@patient.id%>">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Patient">
+  </form>
 
-<a class="button" href="/patients/<%= @patient.id %>/edit">Edit Patient</a>
+<% end %>
+
+
+
 <a class="button" href="/patients">Patients</a>
 

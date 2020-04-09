@@ -1,17 +1,20 @@
-<h3>Edit a new Patient:</h3>
+<h3>Edit a Vital:</h3>
 
-<form action="/patients/<%=@patient.id%>" method="POST">
+<form action="/vital/<%=@vital.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch" />
 
-    <label for="patient_name">Name</label><br>
-    <input type="text" name="name" value=<%=@patient.name%> ><br>
-    <label for="patient_medical_record_number">Medical Record Number</label><br>
-    <input type="integer" name="medical_record_number" value=<%=@patient.medical_record_number%>><br>
-    <label for="patient_date_of_birth">Date of Birth</label><br>
-    <input type="date" name="date_of_birth" value=<%=@patient.date_of_birth%>.strftime("%Y-%m-%d")> <br>
+    <label for="blood_pressure">Blood Pressure</label><br>
+    <input type="text" name="blood_pressure" value=<%=@vital.blood_pressure%>><br>
+    <label for="pulse">Pulse</label><br>
+    <input type="integer" name="pulse" value=<%=@vital.pulse%>><br>
+    <label for="temperature">Temperature</label><br>
+    <input type="float" name="temperature" value=<%=@vital.temperature%>> <br>
+    <label for="oxygen_level">Oxygen Level</label><br>
+    <input type="integer" name="oxygen_level" value=<%=@vital.oxygen_level%>><br>
+    
 
-    <input type="submit" value="Edit patient">
+    <input type="submit" value="Edit vital">
 </form>
 
-<a class="button" href="/patients">patients</a>
+<a class="button" href="/vitals">vitals</a>
 <a class="button" href="/">Home</a>
