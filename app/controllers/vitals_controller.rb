@@ -40,7 +40,7 @@ class VitalsController < ApplicationController
     redirect_if_not_logged_in 
     # 1. find the vital
     set_vital
-    if Vital.valid_params?(params) && @vitals.patient == @patient.id
+    if Vital.valid_params?(params) && @vital.patient != ""
       # 2. modify (update) the vital
       @vitals.update(params.select{|k|k=="blood_pressure" || k=="pulse" || k=="temperature" || k=="oxygen_level" || k=="patient_id"})
       # 3. redirect to show page
@@ -50,9 +50,9 @@ class VitalsController < ApplicationController
     end
   end
 
-  delete '/patients/:id' do 
-    set_patient
-    if @vitals.patient == @patient.id
+  delete '/vitals/:id' do 
+    set_vital
+    if @vital.patient != ""
       @vital.destroy
       flash[:message] = "Successfully deleted that vital."
       redirect to '/vitals'
