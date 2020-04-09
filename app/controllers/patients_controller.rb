@@ -20,10 +20,10 @@ class PatientsController < ApplicationController
     if params[:name] != "" || params[:medical_record_number] != "" || params[:date_of_birth] != ""
       # create a new patient
       @patient = Patient.create(name: params[:name], nurse_id: current_user.id, medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
-      # flash[:message] = "Patient successfully created." if @patient.id
+      flash[:message] = "Patient successfully created." if @patient.id
       redirect "/patients/#{@patient.id}"
     else
-      # flash[:errors] = "Something went wrong - you must provide content for your entry."
+      flash[:errors] = "Something went wrong - you must provide content for your entry."
       redirect '/patients/new'
     end
   end
@@ -48,17 +48,14 @@ class PatientsController < ApplicationController
     redirect_if_not_logged_in
     # 1. find the journal entry
     set_patient
-    if authorized_to_edit?(@patient) && params[:name] != ""
+    if authorized_to_edit?(@patient) && params[:name] != ""  
       # 2. modify (update) the patient
-      @patient.update(params)
+      @patient.update(name: params[:name], medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       # 3. redirect to show page
       redirect "/patients/#{@patient.id}"
     else
       redirect "nurses/#{current_user.id}"
     end
-    # @patient.medical_record_number = params[:medical_record_number]
-    # @patient.date_of_birth = params[:date_of_birth]
-    # @patient.save
   end
   
   delete '/patients/:id' do 
@@ -68,7 +65,7 @@ class PatientsController < ApplicationController
       flash[:message] = "Successfully deleted that entry."
       redirect to '/patients'
     else
-      flash[:message] = "Successfully deleted that entry."
+      redirect to '/patients'
     end
   end
   
