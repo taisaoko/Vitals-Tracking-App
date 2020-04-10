@@ -14,9 +14,10 @@ class VitalsController < ApplicationController
   # post patients to create a patient
   post '/vitals' do
     redirect_if_not_logged_in 
-    if Vital.valid_params?(params)
-      Vital.create(params)
-      flash[:message] = "Patient successfully created." if @vital.id
+    if params[:blood_pressure] != ""
+      @vital = Vital.create(params)
+      @vital.patient_id = 
+      flash[:message] = "Patient successfully created." 
       redirect "/vitals/#{@vital.id}"
     else 
       flash[:errors] = "Something went wrong - you must enter values for new vital."

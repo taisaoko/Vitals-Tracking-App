@@ -12,12 +12,11 @@ class PatientsController < ApplicationController
 
   # post patients to create a patient
   post '/patients' do
-    # binding.pry
     redirect_if_not_logged_in
     # I want to create a new patient and save it to the DB 
     # I also only want to create a patient if a nurse is logged in
     # I only want to save the patient with some info
-    if Patient.valid_params?(params)
+    if params[:name] != ""
       # create a new patient
       @patient = Patient.create(name: params[:name], nurse_id: current_user.id, medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       flash[:message] = "Patient successfully created." if @patient.id

@@ -11,33 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190817211307) do
-
-  create_table "nurses", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "badge_number"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "medical_record_number"
-    t.date     "date_of_birth"
-    t.integer  "nurse_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  create_table "vitals", force: :cascade do |t|
-    t.string   "blood_pressure"
-    t.integer  "pulse"
-    t.float    "temperature"
-    t.integer  "oxygen_level"
-    t.integer  "patient_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
+ActiveRecord::Schema.define(version: 20200410212835) do
 
 end

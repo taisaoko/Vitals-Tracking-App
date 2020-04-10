@@ -5,8 +5,7 @@ class CreateVitals < ActiveRecord::Migration
       t.integer :pulse
       t.float :temperature
       t.integer :oxygen_level
-      t.integer :patient_id
-
+      
       t.timestamps null: false
     end
   end
