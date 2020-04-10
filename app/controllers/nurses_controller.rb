@@ -50,7 +50,7 @@ class NursesController < ApplicationController
       # it would be better to include a message to the user
       # telling them what is wrong
 
-      # flash[:errors] = "Account creation failure: #{@nurse.errors.full_messages.to_sentence}"
+      flash[:errors] = "Account creation failure: #{@nurse.errors.full_messages.to_sentence}"
       redirect '/nurses/new'
     end
   end
