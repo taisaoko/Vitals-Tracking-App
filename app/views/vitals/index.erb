@@ -1,16 +1,19 @@
 <h3>All Vitals</h3>
 <table>
   <th>Name</th>
-  <th>ID</th>
+  <th>Created At</th>
   <th>Blood pressure</th>
   <th>Pulse</th>
   <th>Temperature</th>
   <th>Oxygen Level</th>
   <tr>
     <% @vitals.each do |vital| %>
-      <td align="center"><a href="/vitals/<%= vital.patient %>"><%= vital.patient.name %></a></td>
+      <td align="center">
+        <%vital.patients.each do |patient|%>
+          <li><a href="patients/<%= patient.id %>"><%= patient.name%></a></li>
+        <%end%>
 
-      <td align="center"><a href="/vitals/<%= vital.id %>"><%= vital.id %></a></td>
+      <td align="center"><a href="/vitals/<%= vital.id %>"><%= vital.formatted_created_at %></a></td>
 
       <td align="center"><%= vital.blood_pressure %></a></td>
 
