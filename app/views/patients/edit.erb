@@ -1,6 +1,6 @@
 <h3>Edit a Patient:</h3>
 
-<form action="/patients/<%=@patient.slug%>" method="POST">
+<form action="/patients/<%=@patient.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch" />
 
     <label for="patient_name">Name</label><br>
@@ -8,7 +8,7 @@
     <label for="patient_medical_record_number">Medical Record Number</label><br>
     <input type="integer" name="medical_record_number" value=<%=@patient.medical_record_number%>><br>
     <label for="patient_date_of_birth">Date of Birth</label><br>
-    <input type="date" name="date_of_birth" value=<%=@patient.date_of_birth%>.strftime("%Y-%m-%d")> <br>
+    <input type="date" name="date_of_birth" value=<%=@patient.date_of_birth%>> <br>
 
     <input type="submit" value="Edit patient">
 </form>
