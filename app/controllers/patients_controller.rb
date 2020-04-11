@@ -31,7 +31,7 @@ class PatientsController < ApplicationController
   get '/patients/:id' do
     set_patient
     redirect_if_not_logged_in
-    erb :'patient/show'
+    erb :'patients/show'
   end
 
   # This route should send us to patients/edit.erb, which will render an edit form
@@ -49,13 +49,13 @@ class PatientsController < ApplicationController
     redirect_if_not_logged_in
     # 1. find the journal entry
     set_patient
-    if authorized_to_edit?(@patient) && Patient.valid_params?(params) 
+    if authorized_to_edit?(@patient) &&  params[:name] != ""
       # 2. modify (update) the patient
       @patient.update(name: params[:name], medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       # 3. redirect to show page
       redirect "/patients/#{@patient.id}"
     else
-      redirect "nurses/#{current_user.id}"
+      redirect "nurses/#{current_user.slug}"
     end
   end
   
