@@ -1,6 +1,6 @@
 <h3>Edit a Patient:</h3>
 
-<form action="/patients/<%=@patient.id%>" method="POST">
+<form action="/patients/<%=@patient.slug%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch" />
 
     <label for="patient_name">Name</label><br>
@@ -13,5 +13,5 @@
     <input type="submit" value="Edit patient">
 </form>
 
-<a class="button" href="/patients">patients</a>
+<a class="button" href="/patients">Patients</a>
 <a class="button" href="/">Home</a>
