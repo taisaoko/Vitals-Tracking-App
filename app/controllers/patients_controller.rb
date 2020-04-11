@@ -20,7 +20,7 @@ class PatientsController < ApplicationController
       # create a new patient
       @patient = Patient.create(name: params[:name], nurse_id: current_user.id, medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       flash[:message] = "Patient successfully created." if @patient.id
-      redirect "/patients/#{@patient.slug}"
+      redirect "/patients/#{@patient.id}"
     else
       flash[:errors] = "Something went wrong - you must provide content for your entry."
       redirect '/patients/new'
@@ -28,24 +28,24 @@ class PatientsController < ApplicationController
   end
 
   # Patient SHOW route
-  get '/patients/:slug' do
-    @Patient = Patient.find_by_slug(params[:slug])
+  get '/patients/:id' do
+    set_patient
     redirect_if_not_logged_in
     erb :'patient/show'
   end
 
   # This route should send us to patients/edit.erb, which will render an edit form
-  get '/patients/:slug/edit' do  
+  get '/patients/:id/edit' do  
     redirect_if_not_logged_in
     set_patient
     if authorized_to_edit?(@patient)
       erb :'/patients/edit'
     else
-      redirect "nurses/#{current_user.id}"
+      redirect "nurses/#{current_user.slug}"
     end
   end
  
-  patch '/patients/:slug' do
+  patch '/patients/:id' do
     redirect_if_not_logged_in
     # 1. find the journal entry
     set_patient
@@ -53,13 +53,13 @@ class PatientsController < ApplicationController
       # 2. modify (update) the patient
       @patient.update(name: params[:name], medical_record_number: params[:medical_record_number], date_of_birth: params[:date_of_birth])
       # 3. redirect to show page
-      redirect "/patients/#{@patient.slug}"
+      redirect "/patients/#{@patient.id}"
     else
       redirect "nurses/#{current_user.id}"
     end
   end
   
-  delete '/patients/:slug' do 
+  delete '/patients/:id' do 
     set_patient
     if authorized_to_edit?(@patient)
       @patient.destroy
