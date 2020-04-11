@@ -9,7 +9,7 @@ class Patient < ActiveRecord::Base
     end
     
     def self.find_by_slug(slug)
-        all.find{|nurse| nurse.slug == slug}
+        all.find{|patient| patient.slug == slug}
     end
 
     # def self.valid_params?(params)
