@@ -15,7 +15,7 @@
 <table>
   <tr>
       <ol>
-      Vitals
+      All Vitals
         <%@patient.vitals.each do |vital|%>
         <li><a href="/vitals/<%= vital.id %>"><%= vital.formatted_created_at %></a></li>
         <%end%>
@@ -23,6 +23,10 @@
   </tr>
 </table>
 <br>
+
+<% if @patient.vitals != [] %>
+  <a href="/vitals/new">New Vital</a>
+<% end %>
 
 <% if authorized_to_edit?(@patient) %>
   <a href="/patients/<%= @patient.id %>/edit">Edit Patient</a>
