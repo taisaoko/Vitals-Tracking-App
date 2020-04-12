@@ -6,10 +6,23 @@
   <th>Pulse</th>
   <th>Temperature</th>
   <th>Oxygen Level</th>
+
+  <table>
+    <tr>
+        <ol>
+        Vitals
+          <%@patient.vitals.each do |vital|%>
+          <li><a href="/vitals/<%= vital.id %>"><%= vital.formatted_created_at %></a></li>
+          <%end%>
+        </ol>      
+    </tr>
+  </table>
+  <br>
+
   <tr>
     <% @vitals.each do |vital| %>
       <td align="center">
-        <%vital.patients.each do |patient|%>
+        <% vital.patients.each do |patient|%>
           <li><a href="patients/<%= patient.id %>"><%= patient.name%></a></li>
         <%end%>
 
@@ -22,9 +35,9 @@
       <td align="center"><%= vital.temperature%></td>
 
       <td align="center"><%= vital.oxygen_level%></td>
+    <% end %>
   </tr>
-  <% end %>
-</table>
+
 <br>
 
 <a class="button" href="/vitals">Vitals</a>
