@@ -1,6 +1,6 @@
 <h3>Edit a Vital:</h3>
 
-<form action="/vital/<%=@vital.id%>" method="POST">
+<form action="/vitals/<%=@vital.id%>" method="POST">
     <input id="hidden" type="hidden" name="_method" value="patch" />
 
     <label for="blood_pressure">Blood Pressure</label><br>
@@ -16,5 +16,5 @@
     <input type="submit" value="Edit vital">
 </form>
 
-<a class="button" href="/vitals">vitals</a>
+<a class="button" href="/vitals">All Vitals</a>
 <a class="button" href="/">Home</a>
