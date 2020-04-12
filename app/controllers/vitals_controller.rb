@@ -1,7 +1,7 @@
 class VitalsController < ApplicationController
   get '/vitals' do
     redirect_if_not_logged_in 
-    @vitals= Vital.all
+    @vitals = Vital.all
       erb :'vitals/index'
   end
 
@@ -42,7 +42,7 @@ class VitalsController < ApplicationController
     set_vital
     if params[:blood_pressure] != "" && @vital.patients != []
       # 2. modify (update) the vital
-      @vitals.update(params.select{|k|k=="blood_pressure" || k=="pulse" || k=="temperature" || k=="oxygen_level" || k=="patient_id"})
+      @vital.update(params.select{|k|k=="blood_pressure" || k=="pulse" || k=="temperature" || k=="oxygen_level" || k=="patient_id"})
       # 3. redirect to show page
       redirect "/vitals/#{@vital.id}"
     else
