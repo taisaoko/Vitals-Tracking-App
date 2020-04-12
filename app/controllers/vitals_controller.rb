@@ -14,10 +14,9 @@ class VitalsController < ApplicationController
   # post patients to create a patient
   post '/vitals' do
     redirect_if_not_logged_in 
-    if params[:blood_pressure] != ""
-      @vital = Vital.create(params)
-      @vital.patient_id = 
-      flash[:message] = "Patient successfully created." 
+    if params[:blood_pressure] != "" && @vital.patients != []
+      @vital = Vital.create(params)      
+      flash[:message] = "Vital successfully created." 
       redirect "/vitals/#{@vital.id}"
     else 
       flash[:errors] = "Something went wrong - you must enter values for new vital."
@@ -37,11 +36,11 @@ class VitalsController < ApplicationController
     erb :'vitals/edit'
   end
 
-  patch"/vitals/:id" do
+  patch '/vitals/:id' do
     redirect_if_not_logged_in 
     # 1. find the vital
     set_vital
-    if Vital.valid_params?(params) && @vital.patient != ""
+    if params[:blood_pressure] != "" && @vital.patients != []
       # 2. modify (update) the vital
       @vitals.update(params.select{|k|k=="blood_pressure" || k=="pulse" || k=="temperature" || k=="oxygen_level" || k=="patient_id"})
       # 3. redirect to show page
@@ -53,7 +52,7 @@ class VitalsController < ApplicationController
 
   delete '/vitals/:id' do 
     set_vital
-    if @vital.patient != ""
+    if @vital.patients != []
       @vital.destroy
       flash[:message] = "Successfully deleted that vital."
       redirect to '/vitals'
