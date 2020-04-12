@@ -1,4 +1,6 @@
-<h3>Name: <%= @vital.patient.name %> </h3>
+<h3>Patient: <%@vital.patients.each do |patient|%><%= patient.name%>
+    <%end%> 
+</h3>
 
 <table>
   <tr>
@@ -16,7 +18,7 @@
 <table>
 <br>
 
-<% if @vital.patient != "" %>
+<% if @vital.patients != [] %>
   <a href="/vitals/<%= @vital.id %>/edit">Edit vital</a>
   <br><br>
 
@@ -28,5 +30,6 @@
 <% end %>
 <br>
 
-<a class="button" href="/vitals">Vitals</a>
+<a class="button" href="/vitals">All Vitals</a>
+<a class="button" href="/">Home</a>
 
