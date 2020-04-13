@@ -57,8 +57,8 @@ class NursesController < ApplicationController
 
   # User SHOW route
   get '/nurses/:slug' do
-    @nurse = Nurse.find_by_slug(params[:slug])
     redirect_if_not_logged_in
+    @nurse = Nurse.find_by_slug(params[:slug])    
     erb :'nurses/show'
   end
 

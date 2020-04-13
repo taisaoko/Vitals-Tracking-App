@@ -9,7 +9,7 @@ class Nurse < ActiveRecord::Base
     end
     
     def self.find_by_slug(slug)
-        all.find{|nurse| nurse.slug == slug}
+        Nurse.all.find{|nurse| nurse.slug == slug}
     end
    
 end
