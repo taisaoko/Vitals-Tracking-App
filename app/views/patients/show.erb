@@ -24,7 +24,7 @@
 </table>
 <br>
 
-<% if @patient.vitals != [] %>
+<% if @patient.vitals.empty? %>
   <a href="/vitals/new">New Vital</a>
 <% end %>
 
