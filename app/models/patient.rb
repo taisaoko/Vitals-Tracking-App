@@ -1,6 +1,5 @@
 class Patient < ActiveRecord::Base
     belongs_to :nurse
-    has_many :vitals
     has_many :patient_vitals
     has_many :vitals, through: :patient_vitals
 

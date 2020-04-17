@@ -1,6 +1,6 @@
 class Nurse < ActiveRecord::Base
     has_many :patients
-    has_many :vitals, through: :patients
+    has_many :patient_vitals, through: :patients
 
     has_secure_password # gives us access to the #authenticate method!
 
