@@ -18,7 +18,7 @@
 <table>
 <br>
 
-<% if @vital.patients != [] %>
+<% if @vital.patients.empty? %>
   <a href="/vitals/<%= @vital.id %>/edit">Edit vital</a>
   <br><br>
 

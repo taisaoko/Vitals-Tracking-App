@@ -14,7 +14,7 @@ class VitalsController < ApplicationController
   # post patients to create a patient
   post '/vitals' do
     redirect_if_not_logged_in 
-    if params[:blood_pressure] != "" && @vital.patients != []
+    if params[:blood_pressure] != "" && @vital.patients.empty?
       @vital = Vital.create(params)      
       flash[:message] = "Vital successfully created." 
       redirect "/vitals/#{@vital.id}"
@@ -40,7 +40,7 @@ class VitalsController < ApplicationController
     redirect_if_not_logged_in 
     # 1. find the vital
     set_vital
-    if params[:blood_pressure] != "" && @vital.patients != []
+    if params[:blood_pressure] != "" && @vital.patients.empty?
       # 2. modify (update) the vital
       @vital.update(params.select{|k|k=="blood_pressure" || k=="pulse" || k=="temperature" || k=="oxygen_level" || k=="patient_id"})
       # 3. redirect to show page
